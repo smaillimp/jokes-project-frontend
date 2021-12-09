@@ -1,145 +1,70 @@
-# Fullstack project
+# Getting Started with Create React App
 
-**Focus on implementing the full stack (backend and frontend). It's not important to have all the functionality in place.**
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Write a web server, which delivers jokes as json data. The React frontend displays the jokes.
+## Available Scripts
 
-Create one folder for the backend and one folder for the frontend. Track the changes for each of them in a separate GitHub repository. When creating the repositories with GitHub, add the MIT License, as the library you will be using has the same licence: https://github.com/elijahmanor/devpun/blob/master/LICENSE
+In the project directory, you can run:
 
-<img src="./MIT-licence.png" alt="drawing" width="500"/>
+### `npm start`
 
-## Backend with Node.js + Express
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Write an [express](https://expressjs.com/) web server with the following routes:
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-```bash
-GET /random # returns a random joke
+### `npm test`
 
-GET /by-category?name=<category-name> # returns all jokes of a specific category
-# Example:
-GET /by-category?name=react # returns all react jokes
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-GET /search?text=<search-term> # returns all jokes which contain the given search term in the text (should be case-insensitive)
-# Example:
-GET /search?text=component # returns all jokes which contain "component" in the text
+### `npm run build`
 
-(optional)
-GET /categories # returns all joke categories
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-(optional)
-GET /popular # returns the most popular jokes (the jokes with a rating of 1)
-```
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-The question mark in the urls are [query parameters](https://branch.io/glossary/query-parameters/). See this article about [Query Parameters in Express](https://masteringjs.io/tutorials/express/query-parameters) how you can read them when handling the request.
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-Use the [devpun](https://www.npmjs.com/package/devpun) library to get the jokes. This library will not provide all the functionality you need. For example, it does not provide you with a method to get the most popular jokes. However, you can import `jokes.json` in your project and implement the logic by yourself:
+### `npm run eject`
 
-```js
-const jokesDB = require('devpun/jokes.json');
-```
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-In order to have the backend application on one domain and the frontend application on another, [allow CORS requests](https://expressjs.com/en/resources/middleware/cors.html) for localhost and your frontend domain when published on Netlify.<br />
-[More about CORS](https://www.youtube.com/watch?v=4KHiSt0oLJ0)
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-```js
-app.use(
-  cors({
-    origin: ['http://localhost:3000', '<deployed URL>'],
-  })
-);
-```
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-Deploy the server on [Heroku](https://www.heroku.com/). In order to make the deployment work, add the following code to your `package.json` file:
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-```json
-"engines": {
-    "node": "16.13.0" // Enter your Node.js version here (run "node -v" in your terminal)
-}
-```
+## Learn More
 
-_Hint: How to remove duplicate values (for /categories)_
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-```js
-const numbers = Array.from(new Set([1, 1, 2, 3, 3]));
-// numbers is [1, 2, 3]
-```
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-## Frontend with React
+### Code Splitting
 
-Create a react application with the following pages:
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-- Random joke
-- Jokes by category
-- Joke search
-- Popular jokes (optional)
-- 404 / not found (optional)
+### Analyzing the Bundle Size
 
-Create the GitHub repository first (see licence information above), clone the repository and create the react application directly within the cloned folder:
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-```
-npx create-react-app .
-```
+### Making a Progressive Web App
 
-Use your backend to get the jokes. Some of them arrive in the following format:
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-```json
-"q. <question text> a. <answer text>"
-```
+### Advanced Configuration
 
-You can display it directly like that or split it into question and answer. If you want to split it, here's the code to do that:
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-```js
-const questionChars = 'q. ';
-const answerChars = 'a. ';
+### Deployment
 
-const splitQuestionAndAnswer = (jokeString) => {
-  if (jokeString.includes(questionChars) && jokeString.includes(answerChars)) {
-    const question = jokeString.substring(questionChars.length, jokeString.indexOf(answerChars) - 1);
-    const answer = jokeString.substring(jokeString.indexOf(answerChars) + answerChars.length);
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-    return {
-      question,
-      answer,
-      text: null,
-    };
-  }
+### `npm run build` fails to minify
 
-  return {
-    question: null,
-    answer: null,
-    text: jokeString,
-  };
-};
-```
-
-### Randome joke page
-
-- Route: `/random`
-- This is the homepage. When the user opens the page with route `/`, redirect the user to this page.
-- Display a random joke on the page.
-
-### Jokes by category page
-
-- Route: `/by-category`
-- Display a button for each category. Either hardcode the categories as array in your frontend application (see [list of all the tags](https://github.com/elijahmanor/devpun#tags)) or load the categories from your backend with `GET /categories`.
-- After clicking a category button, load the jokes of this category and display them on the page.
-
-### Joke search page
-
-- Route: `/search`
-- Display a search field and a submit button. After submitting, load the jokes which contain the search term and display them on the page.
-- Inform the user when no joke was found.
-
-### Popular jokes page (optional)
-
-- Route: `/popular`
-- Load the most popular jokes and display them on the page.
-
-### 404 / not found page (optional)
-
-- Route: any route, which does not lead to a page.
-- Display a nice message to the user that the requested page does not exist.
-
-Deploy your site on [Netlify](https://www.netlify.com/).
-
-- To make the page reloads work, check out [this article about redirects on Netlify](https://ridbay.medium.com/react-routing-and-netlify-redirects-fd1f00eeee95).
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
